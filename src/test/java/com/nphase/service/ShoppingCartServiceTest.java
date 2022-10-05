@@ -6,23 +6,23 @@ import com.nphase.entity.ShoppingCart;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.naming.OperationNotSupportedException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class ShoppingCartServiceTest {
     private final ShoppingCartService service = new ShoppingCartService();
 
+
     @Test
-    public void calculatesPrice()  {
+    public void calculatesDiscountedPrice() {
         ShoppingCart cart = new ShoppingCart(Arrays.asList(
-                new Product("Tea", BigDecimal.valueOf(5.0), 2),
-                new Product("Coffee", BigDecimal.valueOf(6.5), 1)
+                new Product("Tea", BigDecimal.valueOf(5.0), 4)
         ));
+        BigDecimal expectedPrice = BigDecimal.valueOf(18.0);
 
-        BigDecimal result = service.calculateTotalPrice(cart);
+        BigDecimal actualPrice = service.calculateTotalPriceWithDiscount(cart);
 
-        Assertions.assertEquals(result, BigDecimal.valueOf(16.5));
+        Assertions.assertEquals(0, expectedPrice.compareTo(actualPrice));
     }
 
 }
