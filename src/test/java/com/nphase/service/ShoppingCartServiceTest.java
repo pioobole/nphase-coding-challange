@@ -16,13 +16,15 @@ public class ShoppingCartServiceTest {
     @Test
     public void calculatesDiscountedPrice() {
         ShoppingCart cart = new ShoppingCart(Arrays.asList(
-                new Product("Tea", BigDecimal.valueOf(5.0), 4)
+                new Product("Tea", BigDecimal.valueOf(5.3), 2, "drinks"),
+                new Product("Coffee", BigDecimal.valueOf(3.5), 2, "drinks"),
+                new Product("Cheese", BigDecimal.valueOf(8), 2, "food")
         ));
-        BigDecimal expectedPrice = BigDecimal.valueOf(18.0);
+        BigDecimal expectedPrice = BigDecimal.valueOf(31.84);
 
         BigDecimal actualPrice = service.calculateTotalPriceWithDiscount(cart);
 
-        Assertions.assertEquals(0, expectedPrice.compareTo(actualPrice));
+        Assertions.assertEquals(expectedPrice, actualPrice);
     }
 
 }
